@@ -1,0 +1,353 @@
+menu "RetroVMS Configuration"
+
+    choice RETROVMS_HW_MODEL
+        prompt "Select the RETROVMS hardware model to build for"
+            default RETROVMS_MINI_V1
+            help
+                RETROVMS_MINI_V1               (early developer) hardware v1
+                RETROVMS_MINI_V2               pre-production
+    
+    config RETROVMS_MINI_V1
+        bool "hardware v1"
+        help
+            Select this: (early development) 
+    
+    config RETROVMS_MINI_V2
+        bool "hardware v2"
+        help
+            Select this: pre-production
+    
+    endchoice # RETROVMS_HW_MODEL
+
+    choice MODEM_CONNECTION_TYPE
+        prompt "Type of serial connection to the modem"
+        default MODEM_SERIAL_IS_UART
+        config MODEM_SERIAL_IS_UART
+            bool "UART"
+            help
+                Connect to modem via UART.
+
+        config MODEM_SERIAL_IS_USB
+            bool "USB"
+            depends on IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+            help
+                Connect to modem via USB (CDC-ACM class). For IDF version >= 4.4.
+
+    endchoice
+
+    menu "MODEM UART Configuration"
+        depends on MODEM_SERIAL_IS_UART
+        config MODEM_UART_TX
+            int "TXD GPIO Number"
+            default 9
+            range 0 31
+            help
+                GPIO number of MODEM UART TX (DTE->DCE).
+
+        config MODEM_UART_RX
+            int "RXD GPIO Number"
+            default 8
+            range 0 31
+            help
+                GPIO number of MODEM UART RX (DCE->DTE).
+
+        config MODEM_UART_RTS
+            int "RTS GPIO Number"
+            default 7
+            range 0 31
+            help
+                GPIO number of MODEM UART RTS.
+
+        config MODEM_UART_CTS
+            int "CTS GPIO Number"
+            default 6
+            range 0 31
+            help
+                GPIO number of MODEM UART CTS.
+
+        config MODEM_UART_DTR
+            int "DTR GPIO Number"
+            default 6
+            range 0 31
+            help
+                GPIO number of MODEM UART DTR.
+
+        config MODEM_UART_EVENT_TASK_STACK_SIZE
+            int "UART Event Task Stack Size"
+            range 2000 6000
+            default 2048
+            help
+                Stack size of UART event task.
+
+        config MODEM_UART_EVENT_TASK_PRIORITY
+            int "UART Event Task Priority"
+            range 3 22
+            default 5
+            help
+                Priority of UART event task.
+
+        config MODEM_UART_EVENT_QUEUE_SIZE
+            int "UART Event Queue Size"
+            range 10 40
+            default 30
+            help
+                Length of UART event queue.
+
+        config MODEM_UART_PATTERN_QUEUE_SIZE
+            int "UART Pattern Queue Size"
+            range 10 40
+            default 20
+            help
+                Length of UART pattern queue.
+
+        config MODEM_UART_TX_BUFFER_SIZE
+            int "UART TX Buffer Size"
+            range 256 2048
+            default 512
+            help
+                Buffer size of UART TX buffer.
+
+        config MODEM_UART_RX_BUFFER_SIZE
+            int "UART RX Buffer Size"
+            range 256 2048
+            default 1024
+            help
+                Buffer size of UART RX buffer.
+
+        choice MODEM_FLOW_CONTROL
+            depends on MODEM_SERIAL_IS_UART
+            bool "Set preferred modem control flow"
+            default MODEM_FLOW_CONTROL_NONE
+            help
+                Set the modem's preferred control flow
+
+            config MODEM_FLOW_CONTROL_NONE
+                bool "No control flow"
+            config MODEM_FLOW_CONTROL_SW
+                bool "SW control flow"
+            config MODEM_FLOW_CONTROL_HW
+                bool "HW control flow"
+        endchoice
+
+    endmenu
+    
+    config MODEM_PWR_PIN
+        int "MODEM PWR Control GPIO#"
+        default 10
+        range 0 31
+        help
+            GPIO connected to modem's power key pin.
+
+    choice MODEM_DEVICE
+        prompt "Choose supported modem device (DCE)"
+        default MODEM_DEVICE_SIM7600
+        help
+            Select modem device connected to the ESP DTE.
+        config MODEM_DEVICE_SIM800
+            depends on MODEM_SERIAL_IS_UART
+            bool "SIM800"
+            help
+                SIMCom SIM800L is a GSM/GPRS module.
+                It supports Quad-band 850/900/1800/1900MHz.
+        config MODEM_DEVICE_BG96
+            bool "BG96"
+            help
+                Quectel BG96 is a series of LTE Cat M1/Cat NB1/EGPRS module.
+        config MODEM_DEVICE_SIM7000
+            depends on MODEM_SERIAL_IS_UART
+            bool "SIM7000"
+            help
+                SIM7000 is a Multi-Band LTE-FDD and GSM/GPRS/EDGE module.
+        config MODEM_DEVICE_SIM7070
+            depends on MODEM_SERIAL_IS_UART
+            bool "SIM7070"
+            help
+                SIM7070 is Multi-Band CAT M and NB IoT module.
+        config MODEM_DEVICE_SIM7600
+            bool "SIM7600"
+            help
+                SIM7600 is a Multi-Band LTE-TDD/LTE-FDD/HSPA+ and GSM/GPRS/EDGE module.
+        config MODEM_DEVICE_A7670
+            depends on MODEM_SERIAL_IS_USB
+            bool "A7670"
+            help
+                A7670X is Multi-Band LTE-FDD/LTE-TDD/GSM/GPRS/EDGE module.
+
+        config MODEM_DEVICE_CUSTOM
+            select ESP_MODEM_ADD_CUSTOM_MODULE
+            bool "Custom device"
+            help
+                This demonstrates use of a custom device in C-API.
+
+    endchoice
+
+    config MODEM_PPP_APN
+        string "Set MODEM APN"
+        default "hologram"
+        help
+            Set APN (Access Point Name), a logical name to choose data network
+
+
+    choice SDMMC_BUS_WIDTH
+        prompt "SD/MMC bus width"
+        default SDMMC_BUS_WIDTH_1
+        help
+            Select the bus width of SD or MMC interface.
+            Note that even if 1 line mode is used, D3 pin of the SD card must have a pull-up resistor connected.
+            Otherwise the card may enter SPI mode, the only way to recover from which is to cycle power to the card.
+
+        config SDMMC_BUS_WIDTH_4
+            bool "4 lines (D0 - D3)"
+
+        config SDMMC_BUS_WIDTH_1
+            bool "1 line (D0)"
+    endchoice
+
+    if SOC_SDMMC_USE_GPIO_MATRIX
+
+        config SDMMC_CMD
+            int "SD CMD GPIO#"
+            default 45 
+
+        config SDMMC_CLK
+            int "SD CLK GPIO#"
+            default 46 
+
+        config SDMMC_D0
+            int "SD D0 GPIO#"
+            default 47 
+
+        if SDMMC_BUS_WIDTH_4
+
+            config SDMMC_D1
+                int "D1 GPIO#"
+                default 38 
+
+            config SDMMC_D2
+                int "D2 GPIO#"
+                default 33 
+
+            config SDMMC_D3
+                int "D3 GPIO#"
+                default 34 
+
+        endif  # SDMMC_BUS_WIDTH_4
+
+    endif  # SOC_SDMMC_USE_GPIO_MATRIX
+
+    config SDCARD_CD
+        int "Card Detect GPIO#"
+        default 3
+
+    config SDCARD_FORMAT_IF_MOUNT_FAILED
+        bool "Format the card if mount failed"
+        default n
+        help
+            If this config item is set, format_if_mount_failed will be set to true and the card will be formatted if
+            the mount has failed.
+ 
+    config SPI_MISO
+        int "SPI MOSI GPIO#"
+        default 13 
+
+    config SPI_MOSI
+        int "SPI MISO GPIO#"
+        default 11 
+
+    config SPI_CLK
+        int "SPI CLK GPIO#"
+        default 12            
+
+    config CAN_0_TX
+        int "CAN0 TX GPIO# (built in)"
+        default 2 
+
+    config CAN_0_RX
+        int "CAN0 RX GPIO# (built in)"
+        default 1  
+
+    config CAN_1_CS
+        int "CAN1 CS GPIO#"
+        default 10  
+
+    config CAN_1_INT
+        int "CAN1 INT GPIO#"
+        default 9  
+
+    config CAN_2_CS
+        int "CAN2 CS GPIO#"
+        default 14  
+
+    config CAN_2_INT
+        int "CAN2 INT GPIO#"
+        default 8  
+
+    config RMT_LED
+        int "Addressable LED GPIO#"
+        default 48 
+
+    config BUZZER
+        int "Piezo buzzer GPIO#"
+        default 35 
+
+    config SPEEDO
+        int "Speedo driver GPIO#"
+        default 41 
+
+    config TACHO
+        int "Tacho driver GPIO#"
+        default 42  
+
+    config I2C_SCL
+        int "I2C clock GPIO#"
+        default 5
+
+    config I2C_SDA
+        int "I2C data GPIO#"
+        default 4
+        
+    config I2C_INT
+        int "I2C interrupt GPIO#"
+        default 18
+
+    config INPUTS_CS
+        int "Multi Input CS GPIO#"
+        default 16
+
+    config INPUTS_INT
+        int "Multi Input interrupt GPIO#"
+        default 6
+
+    config OUTPUTS_CS
+        int "Multi Output CS GPIO#"
+        default 17
+
+    config IPC_CS
+        int "Inter Processor CS GPIO#"
+        default 16        
+
+    config IPC_INT
+        int "Inter Processor interrupt GPIO#"
+        default 38 
+
+    config IPC_GD0
+        int "IPC GD0 GPIO#"
+        default 5 
+
+    config CONSOLE_TX
+        int "Console UART Tx GPIO#"
+        default 43 
+
+    config CONSOLE_RX
+        int "Console UART RXxGPIO#"
+        default 44 
+
+    config LIN_UART_TX
+        int "LIN bus UART Tx GPIO#"
+        default 17 
+
+    config LIN_UART_RX
+        int "LIN bus UART Rx GPIO#"
+        default 18 
+
+endmenu

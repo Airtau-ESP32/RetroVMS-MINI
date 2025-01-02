@@ -1,0 +1,26 @@
+dependencies:
+  espressif/arduino-esp32: ">=3.0.2"
+  idf: ">=5.1"
+
+  # bblanchon/arduinojson: 
+  #   public:
+  #   version: ">=6.21.4"
+
+  # espressif/mdns: 
+  #   public:
+  #   version: "^1.2.2"
+
+  espressif/esp-modbus:
+    version: "^1.0"
+
+  espressif/esp_modem: 
+    version: "^1.1.0"
+
+  joltwallet/littlefs:
+    version: "^1.5.3"
+
+  esp32m:
+    # git: https://github.com/esp32m/core.git
+    path: /Users/jep/github/core/esp32m
+
+
