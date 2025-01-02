@@ -1,7 +1,7 @@
 ![Pasted Graphic 1](https://github.com/jetpax/RetroVMS/assets/6566148/6e31c0d8-9629-47cd-b3c3-4f374e389515)
 ## Why RetroVMS?
 
-RetroVMS brings leading edge OEM connected vehicle capabilities to EV conversions.
+RetroVMS aims to bring Connected Vehicle capabilities to the EV conversion community, enabling leading-OEM style Mobile App control and monitoring.
 
 One of the biggest challenges of the EV conversion process lies in establishing seamless connectivity between the old and the new components, which is typically overcome with one or more Vehicle Control Units (VCU).  
 
