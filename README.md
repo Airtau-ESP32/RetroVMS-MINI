@@ -1,22 +1,22 @@
-![Pasted Graphic 1](https://github.com/jetpax/RetroVMS/assets/6566148/6e31c0d8-9629-47cd-b3c3-4f374e389515)
+![Pasted Graphic 1](/images/retroVMS-logo.png)
 ## Why RetroVMS?
 
 RetroVMS aims to bring Connected Vehicle capabilities to the EV conversion community, enabling leading-OEM style Mobile App control and monitoring.
 
 One of the biggest challenges of the EV conversion process lies in establishing seamless connectivity between the old and the new components, which is typically overcome with one or more Vehicle Control Units (VCU).  
 
-RetroVMS is a Vehicle Management System (VMS), which provides not only these VCU functions, but also serves as a secure gateway providing mobile app integration over a 4G cellular data network.    
+RetroVMS is a Vehicle Management System (VMS), which provides not only these VCU functions, but also serves as a secure gateway providing mobile app integration over a 4G cellular data network.  
 
 
 ## Who is RetroVMS for?
 
-￼![IMG_6830](https://github.com/jetpax/RetroVMS/assets/6566148/04b957aa-405e-4dc9-a83b-e64ff7e62782)
+￼![IMG_6830](/images/teslarr.png)
 
 RetroVMS was created primarily for EV conversion specialists and Restomod enthusiasts.  But it's also the ideal platform for owners of both OEM EVs and traditional ICE vehicles who seek features often overlooked by manufacturers. For example, RetroVMS offers the convenience of live vehicle location updates directly on your smartphone.
 
 
 ## What is RetroVMS?
-![retrovmsV3](https://github.com/user-attachments/assets/d8ce9bb0-32b2-43b0-b556-4f894ca9a72b)
+![retrovmsV3](/images/retroVMS-MINI.png)
 
 The RetroVMS module has 5 main functions:
 
@@ -31,8 +31,7 @@ The firmware is compatible with OVMS,  which already has support for many existi
 
 ## Example Application
 
-<img width="1423" alt="Application Example" src="https://github.com/jetpax/RetroVMS/assets/6566148/d7c8f70f-5cbf-4cf2-87c0-7271d783062b">
-
+![Application Example](/images/retroVMS-app-example.png)
 
 ## Features
 
@@ -40,19 +39,19 @@ The firmware is compatible with OVMS,  which already has support for many existi
     * Control and monitor all vital vehicle functions remotely
     * Provide live vehicle charge status to route planning apps eg ABRP
     * Global Radio standards compatibility
-    * Secure remote debug access and event logging 
+    * Secure remote debug access and event logging
 * Legacy vehicle and EV system integration including
     * Dashboard interfacing
     * Remote locking 
     * Charge monitoring and control
     * Smart LED Ambient Lighting
     * HVAC and thermal management
-    * Tyre Pressure Monitoring 
+    * Tyre Pressure Monitoring
 * Vehicle Dynamics Capture (GNSS & 3D Accelerometer)
     * Geolocation
     * Geofencing
     * Vehicle Movement (aka Flatbed) alerting
-    * Traction control 
+    * Traction control
 * Flexible, Rugged Hardware
     * Run Time hardware I/O configuration (eg HS, LS, PWM)
     * Thermal/Overload/short/open circuit detection
@@ -60,7 +59,7 @@ The firmware is compatible with OVMS,  which already has support for many existi
     * Modular wireless and processor for supply-chain resilience and future proofing 
     * Switch whetting
     * Low Quiescent current operation
-    * Sealed enclosure 
+    * Sealed enclosure
 * Vehicle Reverse Engineering support
 * Bluetooth Driver Information Panel support
 
@@ -73,7 +72,7 @@ The firmware is compatible with OVMS,  which already has support for many existi
 - Perform ICE ECU functions
 
 
-## RetroVMS Module firmware 
+## RetroVMS Module firmware
 
 RetroVMS module software, has 4 components using the ESP-IDF framework running on top of FreeRTOS.
 
@@ -81,8 +80,8 @@ RetroVMS module software, has 4 components using the ESP-IDF framework running o
 - OVMS compatible vehicle monitoring and control 
 - ReactJS + MUI web configuration app (served by RetroVMS but running on web client)
   
-<img width="1118" alt="Pasted Graphic 15" src="https://github.com/jetpax/RetroVMS/assets/6566148/a22e95dd-ece0-48eb-a037-d339cc8bfc1f">
+![ebUI](/images/retroVMS-webUI.png)
 
 
 #### An OVMS compatible console is available over websockets
-<img width="568" alt="Pasted Graphic 10" src="https://github.com/jetpax/RetroVMS/assets/6566148/a047de19-4499-4cc7-adb9-b156ad6d6541">
+![console](/images/retroVMS-console.png)
