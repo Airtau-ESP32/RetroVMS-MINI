@@ -17,7 +17,7 @@ RetroVMS was created primarily for EV conversion specialists and Restomod enthus
 
 
 ## What is RetroVMS?
-![retrovmsV3]([/](https://github.com/jetpax/RetroVMS-MINI/blob/main/)images/retroVMS-MINI.png?raw=true)
+![retrovmsV3](https://github.com/jetpax/RetroVMS-MINI/blob/main/images/retroVMS-MINI.png?raw=true)
 
 The RetroVMS module has 5 main functions:
 
