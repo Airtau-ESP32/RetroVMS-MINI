@@ -11,7 +11,7 @@ RetroVMS is a Vehicle Management System (VMS), which provides not only these VCU
 
 ## Who is RetroVMS for?
 
-￼![IMG_6830](https://github.com/jetpax/RetroVMS-MINI/blob/main/images/teslarr.png?raw=true)
+![IMG_6830](https://github.com/jetpax/RetroVMS-MINI/blob/main/images/teslarr.png?raw=true)
 
 RetroVMS was created primarily for EV conversion specialists and Restomod enthusiasts.  But it's also the ideal platform for owners of both OEM EVs and traditional ICE vehicles who seek features often overlooked by manufacturers. For example, RetroVMS offers the convenience of live vehicle location updates directly on your smartphone.
 
