@@ -20,7 +20,7 @@ See: [http://www.sphinx-doc.org/en/master/usage/installation.html](http://www.sp
 
 ```
 # pin m2r2 dependency
-pip install --force-reinstall "docutils>=0.19,<0.21"`
+pip install --force-reinstall "docutils>=0.19,<0.21"
 # install m2r2
 pip install m2r2
 ```
