@@ -18,10 +18,20 @@ See: [http://www.sphinx-doc.org/en/master/usage/installation.html](http://www.sp
 
 #### 3. Install Plugins
 
-`pip install m2r2`
+```
+# pin m2r2 dependency
+pip install --force-reinstall "docutils>=0.19,<0.21"`
+# install m2r2
+pip install m2r2
+```
 
 #### 4. Build the docs
 
 `make html`
 
 This will generate html output in a `build` folder. The html can then be displayed using a local web server.
+
+```
+cd build
+python -m http.server
+```
